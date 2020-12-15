@@ -5,13 +5,13 @@ const Controller = require('egg').Controller;
 class UserLoginController extends Controller {
   async login() {
     const { ctx, app } = this;
-    const { name, password } = ctx.request.body;
-    // console.log(name, password, enterprice);
-    const { result } = await ctx.service.user.userLogin.login(name, password);
+    const { username, password } = ctx.request.body;
+    console.log(username, password);
+    const { result } = await ctx.service.user.userLogin.login(username, password);
     ctx.body = result;
     if (result.length > 0) {
       const token = app.jwt.sign({
-        userName: name, // 需要存储的 token 数据
+        userName: username, // 需要存储的 token 数据
       }, app.config.jwt.secret, { expiresIn: '1440m' }); // 2分钟token过期
       ctx.set({ token });// 设置headers
       ctx.body = {
@@ -35,6 +35,7 @@ class UserLoginController extends Controller {
   async register() {
     const { ctx } = this;
     const body = ctx.request.body;
+    console.log(body);
     const { result } = await ctx.service.user.userLogin.register(body);
     ctx.body = result;
     if (result) {
@@ -53,11 +54,9 @@ class UserLoginController extends Controller {
 
   async getInfo() {
     const { ctx } = this;
-    const account = ctx.query.account;
-    const entityName = ctx.query.entityName;
+    const userName = ctx.query.username;
     const password = ctx.query.password;
-    const { result } = await ctx.service.user.userLogin.getInfo(entityName, account, password);
-    console.log(result);
+    const { result } = await ctx.service.user.userLogin.getInfo(userName, password);
     if (JSON.stringify(result) !== '{}') {
       ctx.body = {
         code: '200',
