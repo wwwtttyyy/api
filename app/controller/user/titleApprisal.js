@@ -339,83 +339,24 @@ class TitleApprisalController extends Controller {
     const { result } = await ctx.service.user.titleApprisal.updatedata('jobsummary', body);
     ctx.body = this.handle(result);
   }
-  // async setEduInfo() {
-  //   const body = this.ctx.request.body;
-  //   const { result } = await this.ctx.service.user.titleApprisal.setEduInfo(body);
-  //   console.log(result);
-  //   if (result) {
-  //     this.ctx.body = {
-  //       code: '200',
-  //       message: 'success',
-  //     };
-  //   } else {
-  //     this.ctx.body = {
-  //       code: '401',
-  //       data: result,
-  //       message: '无权限',
-  //     };
-  //   }
-  // }
-  // async getEduInfo() {
-  //   const { ctx } = this;
-  //   // const name = ctx.query.name;
-  //   const certificateNum = ctx.query.certificateNum;
-  //   console.log(certificateNum);
-  //   const { result } = await ctx.service.user.titleApprisal.getEduInfo(certificateNum);
-  //   if (JSON.stringify(result) !== '{}') {
-  //     ctx.body = {
-  //       code: '200',
-  //       data: result,
-  //       message: 'success',
-  //     };
-  //   } else {
-  //     ctx.body = {
-  //       code: '401',
-  //       data: result,
-  //       message: '账号或密码错误',
-  //     };
-  //   }
-  // }
-  // async updateEduInfo() {
-  //   const { ctx } = this;
-  //   // const id = ctx.query.id;
-  //   const body = this.ctx.request.body;
-  //   // console.log(id);
-  //   const { result } = await ctx.service.user.titleApprisal.updateEduInfo(body);
-  //   if (JSON.stringify(result) !== '{}') {
-  //     ctx.body = {
-  //       code: '200',
-  //       data: result,
-  //       message: 'success',
-  //     };
-  //   } else {
-  //     ctx.body = {
-  //       code: '401',
-  //       data: result,
-  //       message: '账号或密码错误',
-  //     };
-  //   }
-  // }
-  // async delEduInfo() {
-  //   const { ctx } = this;
-  //   const id = ctx.query.id;
-  //   // console.log(id);
-  //   const { result } = await ctx.service.user.titleApprisal.delEduInfo(id);
-  //   if (JSON.stringify(result) !== '{}') {
-  //     ctx.body = {
-  //       code: '200',
-  //       data: result,
-  //       message: 'success',
-  //     };
-  //   } else {
-  //     ctx.body = {
-  //       code: '401',
-  //       data: result,
-  //       message: '账号或密码错误',
-  //     };
-  //   }
-  // }
-
+  async submit() {
+    const body = this.ctx.request.body;
+    const { result } = await this.ctx.service.user.titleApprisal.setdata('declare', body);
+    this.ctx.body = this.handle(result);
+  }
+  async submitdeclare() {
+    const { ctx } = this;
+    const body = this.ctx.request.body;
+    const { result } = await ctx.service.user.titleApprisal.updatedata('declare', body);
+    ctx.body = this.handle(result);
+  }
+  async getsubmit() {
+    const { ctx } = this;
+    const certificateNum = ctx.query.unit;
+    console.log(certificateNum);
+    const { result } = await ctx.service.user.titleApprisal.getAlldata('declare');
+    ctx.body = this.handle(result);
+  }
 }
 
 module.exports = TitleApprisalController;

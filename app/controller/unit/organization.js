@@ -70,6 +70,14 @@ class OrganizationController extends Controller {
     this.ctx.body = this.handle(result);
   }
 
+  async delWorker() {
+    const { ctx } = this;
+    const id = ctx.query.id;
+    const { result } = await ctx.service.unit.organization.deldata('workers', id);
+    this.ctx.body = this.handle(result);
+  }
+
+
 }
 
 module.exports = OrganizationController;

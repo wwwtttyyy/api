@@ -47,6 +47,14 @@ class TitleApprisalService extends Service {
     console.log(result);
     return { result };
   }
+  async getAlldata(table) {
+    const data = await this.app.mysql.select(
+      table
+    );
+    const result = JSON.parse(JSON.stringify(data)); // 去除node中mysql查询数据产生的RowDataPacket
+    console.log(result);
+    return { result };
+  }
 
   // async setEduInfo(body) {
   //   const data = await this.app.mysql.insert('education', body);

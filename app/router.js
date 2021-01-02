@@ -10,6 +10,8 @@ module.exports = app => {
   router.post('/unitLogin/register', controller.unit.unitLogin.register);
   router.get('/unitLogin/getInfo', jwt, controller.unit.unitLogin.getInfo);
   router.post('/unitLogin', controller.unit.unitLogin.login);
+  router.post('/setLoginAccount', controller.unit.unitLogin.setLoginAccount);
+  router.delete('/delLoginAccount', jwt, controller.unit.unitLogin.delLoginAccount);
 
   router.post('/userLogin', controller.user.userLogin.login);
   router.post('/userLogin/register', controller.user.userLogin.register);
@@ -73,10 +75,21 @@ module.exports = app => {
   router.get('/user/getSummaryInfo', jwt, controller.user.titleApprisal.getSummaryInfo);
   router.put('/user/updateSummaryInfo', jwt, controller.user.titleApprisal.updateSummaryInfo);
 
+  router.post('/user/declare', jwt, controller.user.titleApprisal.submit);
+  router.put('/user/submitdeclare', jwt, controller.user.titleApprisal.submitdeclare);
+  router.get('/user/getdeclare', jwt, controller.user.titleApprisal.getsubmit);
+
   router.get('/unit/organization/getUserInfo', jwt, controller.unit.organization.getUserInfo);
   router.post('/unit/organization/addWorker', jwt, controller.unit.organization.addWorker);
   router.get('/unit/organization/getWorker', jwt, controller.unit.organization.getWorker);
   router.put('/unit/organization/modifyWorker', jwt, controller.unit.organization.modifyWorker);
+  router.delete('/unit/organization/delWorker', jwt, controller.unit.organization.delWorker);
+
+  router.get('/unit/appraisal/getdeclare', jwt, controller.unit.appraisal.getDeclare);
+  router.post('/unit/appraisal/updatedeclarestate', jwt, controller.unit.appraisal.updatedeclarestate);
+  router.post('/unit/submitReview', jwt, controller.unit.appraisal.setReview);
+  router.get('/unit/getsubmitReview', jwt, controller.unit.appraisal.getReview);
+  router.put('/unit/updatesubmitReview', jwt, controller.unit.appraisal.updateReview);
 
   // router.post('/unitLogin', controller.login.test);
   // router.post('/unitLogin/register', controller.login.register);
